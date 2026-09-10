@@ -1,18 +1,41 @@
-# Composable shorts analysis tools
+# ShortsScope — inspect short videos, frame by frame
 
-A model-agnostic CLI for agents: **fast frame extraction → optional final frame → numbered, timestamped contact sheet**. Developed for use inside OpenClaw, but not dependent on it. This community fork extends [claude-video](https://github.com/bradautomates/claude-video); original MIT copyright and license are retained. A new project name has not yet been selected.
+A model-agnostic CLI for agents: **fast frame extraction → optional final frame → numbered, timestamped contact sheet**. Developed for use inside OpenClaw, but not dependent on it. This community fork extends [claude-video](https://github.com/bradautomates/claude-video); original MIT copyright and license are retained. The goal is evidence-grounded analysis for making your own shorts.
 
-Two independent operations: **`extract`** prepares images locally; **`analyze`** prepares a structured visual-analysis request, imports any model's response, or explicitly runs an optional Codex backend. Designed to help a creator study short-video composition, actions and text styling. Neither operation automatically downloads references or makes a video.
+Independent operations: **`extract`** prepares images locally; **`measure`** adds optional local motion/OCR/pose evidence; **`analyze`** prepares a structured visual-analysis request, imports any model's response, or explicitly runs an optional Codex backend. Designed to help a creator study short-video composition, actions and text styling. Neither operation automatically downloads references or makes a video.
 
 `extract` never calls a model or uploads media. `analyze` defaults to offline preparation too; only `--backend codex` sends the selected images to your authenticated service. The calling AI chooses images, arguments and follow-up intervals. It is not a forced one-click summarizer.
+
+## Install by asking your AI (copy/paste)
+
+아래 프롬프트를 **로컬 도구를 사용할 수 있는 AI**에 붙여넣으세요. 저장소 복제 → 가상환경 → 호스트별 스킬 등록 → 실제 인식 확인 순서로 진행하도록 되어 있습니다.
+
+```text
+https://github.com/JangHyuckYun/shorts-scope 를 현재 AI 환경에 설치해줘.
+먼저 그 저장소의 docs/install/README.md와 현재 호스트별 가이드를 읽어줘:
+Codex는 docs/install/codex.md, Claude Code는 docs/install/claude.md,
+OpenClaw는 docs/install/openclaw.md, Grok은 docs/install/grok.md.
+모델 이름이 아니라 실제 실행 호스트를 기준으로 선택해줘.
+영구 보관할 사용자 디렉터리에 git clone하고 기존 파일/변경은 보존해줘.
+저장소 venv와 requirements-compact.txt를 설치하고 FFmpeg/ffprobe를 확인해줘.
+설치 스크립트를 읽고 올바른 호스트/워크스페이스로 dry-run 후 스킬을 등록해줘.
+설치된 실행기 작동과 호스트가 shorts-scope를 실제 인식하는지 각각 확인해줘.
+관련 없는 설정 변경, 기존 스킬 덮어쓰기, 모델/가중치 자동 설치는 하지 마.
+로컬 실행이나 등록 기능이 없으면 설치했다고 하지 말고 필요한 경로를 알려줘.
+끝나면 설치 위치와 내가 이 스킬을 쓰는 예시를 보여줘.
+```
+
+Host-specific copy/paste prompts: [Codex](docs/install/codex.md) · [Claude Code](docs/install/claude.md) · [OpenClaw](docs/install/openclaw.md) · [Grok / model-vs-host](docs/install/grok.md).
+
+Grok inside OpenClaw uses the OpenClaw installer. Native registration in ordinary Grok web chat has **not** been verified. The installer tests paths/launcher; the receiving agent must still verify runtime discovery. [Installation details and update behavior](docs/install/README.md).
 
 ## Install and extract
 
 Requires Python3.10+, FFmpeg/ffprobe on PATH. Pillow is optional for upstream `/watch`, required for this extraction adapter.
 
 ```sh
-git clone https://github.com/JangHyuckYun/claude-video.git
-cd claude-video
+git clone https://github.com/JangHyuckYun/shorts-scope.git
+cd shorts-scope
 python3 -m venv .venv
 .venv/bin/pip install -r requirements-compact.txt
 .venv/bin/python cli.py extract video.mp4 --out output/overview
@@ -75,6 +98,21 @@ The Codex adapter requires a separately installed/authenticated CLI supporting `
 
 [Detailed usage, output fields and verification](docs/SHORTS_ANALYSIS.md)
 
+## Ground the analysis in local evidence
+
+```sh
+# Optional local measurements (no remote model/API)
+.venv/bin/python -m pip install -r requirements-evidence.txt
+.venv/bin/python cli.py measure output/detail/manifest.json --out output/evidence \
+  --motion-roi 0,0,1,0.35
+
+# Keep dense measurements but send only chosen full frames to the AI
+.venv/bin/python cli.py analyze output/detail/manifest.json --out output/grounded \
+  --evidence output/evidence/evidence.json --select-frames 1,3,5,7
+```
+
+Choose a visible background ROI; the example top strip is not universally background. Optional OCR adds measured text boxes, detail crops and user-supplied font candidate ranking. Optional pose landmarks flag missing foot evidence; they **do not classify running/walking**. [Commands and limitations](docs/EVIDENCE.md) · [Actual before/after evidence](docs/BENCHMARK.md).
+
 ## What differs from upstream?
 
 We reuse upstream keyframe extraction and deduplication. Our adapter adds explicit endpoint preservation, a bounded numbered contact sheet, agent-controlled layout/range/encoding, and machine-readable output. The separate analysis adapter adds a provider-neutral response contract, geometry/reference validation and reports. It is not a new vision model or a new image-grid research method.
@@ -87,4 +125,4 @@ One25.7s prototype test measured input21981→17638 tokens and preprocessing2.45
 
 ## License
 
-MIT; see [LICENSE](LICENSE). Original copyright retained. No third-party videos, screenshots, comments or model weights bundled. External FFmpeg builds and third-party media have their own terms. Not affiliated with OpenClaw or Anthropic.
+MIT; see [LICENSE](LICENSE). Original copyright retained. No third-party videos, screenshots, comments or model weights bundled. External FFmpeg builds and third-party media have their own terms. Not affiliated with OpenClaw, Anthropic, OpenAI or xAI.

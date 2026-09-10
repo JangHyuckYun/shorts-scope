@@ -1,0 +1,4 @@
+# Optional local measurements. Extract/analyze prepare/import do not require these.
+-r requirements-compact.txt
+numpy>=1.26,<3
+opencv-contrib-python>=4.10,<6

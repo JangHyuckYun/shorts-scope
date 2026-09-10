@@ -1,10 +1,12 @@
-# claude-video fork: composable shorts tools + inherited watch skill
+# ShortsScope (claude-video fork): composable shorts tools + inherited watch skill
 
 Agent Skills package that gives an agent a video input. Installable across Claude Code (most common host), Codex, Cursor, GitHub Copilot, and 50+ other [Agent Skills](https://agentskills.io) hosts. Pure-stdlib Python that orchestrates `yt-dlp` + `ffmpeg` and an optional Whisper API.
 
 ## Fork scope
 
-This community fork adds a **composable CLI for shorts creators** alongside the inherited `/watch` skill. The user's current product direction is agent-controlled primitives, not a forced summarization workflow. Keep `extract` model-free. `analyze` defaults to offline request preparation; optional import validates any provider's raw response, and the explicit Codex backend invokes a separately authenticated external service. Do not rename the repository without a selected name.
+This community fork adds a **composable CLI for shorts creators** alongside the inherited `/watch` skill. The user's current product direction is agent-controlled primitives, not a forced summarization workflow. Keep `extract` model-free. `analyze` defaults to offline request preparation; optional import validates any provider's raw response, and the explicit Codex backend invokes a separately authenticated external service. The selected brand is ShortsScope and repository is JangHyuckYun/shorts-scope.
+
+Optional `measure` produces local image-plane motion, OCR crops and pose-availability evidence. Do not call missing feet a gait classification. `assets/shorts-scope.skill.zip` is the separately exported CLI skill; `scripts/install_skill.py` installs its launcher pointing at the full clone. Do not confuse it with inherited self-contained `/watch`.
 
 New files: root `cli.py`; `scripts/compact.py` and `scripts/shorts.py` under the self-contained skill directory; `tests/test_compact.py`/`tests/test_shorts.py`; `docs/SHORTS_ANALYSIS.md`; synthetic fixture generator under `examples/`. Pillow is an optional dependency for the compact adapter (`requirements-compact.txt`); inherited upstream scripts remain stdlib-only.
 

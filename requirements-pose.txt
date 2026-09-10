@@ -1,0 +1,3 @@
+# Optional pose availability checks; user supplies a local model asset separately.
+-r requirements-evidence.txt
+mediapipe>=0.10.20,<2
