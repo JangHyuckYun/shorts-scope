@@ -5,6 +5,8 @@ This community fork was created to prepare visual inputs for video analysis insi
 Upstream: https://github.com/bradautomates/claude-video
 Baseline revision: 83da59fa78c3eee9e20f515fe75c438bb5166efd
 
+Current configurable CLI reference: [README](../README.md). This document records the initial adapter background.
+
 ## Run locally
 
 Requires Python 3.10+, ffmpeg/ffprobe and optional Pillow. No API key is required. The original `/watch` skill remains unchanged; its installer does not automatically enable this adapter.
@@ -17,7 +19,7 @@ python3 -m venv .venv
 
 Send `sheet.jpg` as an image and `prompt.txt` as the accompanying instruction to your OpenClaw image-capable model. Do not send only the file path as text. `manifest.json` lists frame ordering. This adapter does not call a model, upload files, transcribe audio, install hooks or change OpenClaw configuration.
 
-Changes: fast upstream keyframe extraction; reserve one slot for the last decoded frame; bounded frame count; numbered time-separated contact sheet; explicit temporal instructions. Default maximum8 cells, width240; adjustable `--max-frames 2..12`, `--width 160..640`. Use a fresh output directory; nonempty directories are refused. END is the last decoded frame, not an exact timestamp. A keyframe close to END may be redundant but END is intentionally retained.
+Changes: fast upstream keyframe extraction; reserve one slot for the last decoded frame; bounded frame count; numbered time-separated contact sheet; explicit temporal instructions. Default maximum8 cells, width240; adjustable `--max-frames 2..24`, `--width 160..640`. Use a fresh output directory; nonempty directories are refused. END is the last decoded frame in the selected interval, not an exact timestamp. A keyframe close to END may be redundant but END is intentionally retained.
 
 ## Exploratory evidence, not a benchmark claim
 
