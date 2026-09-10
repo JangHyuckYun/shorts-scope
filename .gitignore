@@ -9,7 +9,7 @@ htmlcov/
 .idea/
 .vscode/
 
-# build artifact from scripts/build-skill.sh
+# Optional local build artifacts
 /dist/
 
 # local Claude Code settings
@@ -23,3 +23,7 @@ htmlcov/
 *.mov
 *.webm
 TASK_STATE.md
+
+# Project-local skill installs contain machine-specific runtime paths
+.agents/skills/
+.claude/skills/

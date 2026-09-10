@@ -1,33 +1,50 @@
 # ShortsScope — inspect short videos, frame by frame
 
+**English** · [한국어](README.ko.md)
+
 A model-agnostic CLI for agents: **fast frame extraction → optional final frame → numbered, timestamped contact sheet**. Developed for use inside OpenClaw, but not dependent on it. This community fork extends [claude-video](https://github.com/bradautomates/claude-video); original MIT copyright and license are retained. The goal is evidence-grounded analysis for making your own shorts.
 
-Independent operations: **`extract`** prepares images locally; **`measure`** adds optional local motion/OCR/pose evidence; **`analyze`** prepares a structured visual-analysis request, imports any model's response, or explicitly runs an optional Codex backend. Designed to help a creator study short-video composition, actions and text styling. Neither operation automatically downloads references or makes a video.
+Independent operations: **`extract`** prepares images locally; **`measure`** adds optional local motion/OCR/pose evidence; **`analyze`** prepares a structured visual-analysis request, imports any model's response, or explicitly runs an optional Codex backend. Designed to help a creator study short-video composition, actions and text styling. None of these operations automatically downloads references or makes a video.
 
 `extract` never calls a model or uploads media. `analyze` defaults to offline preparation too; only `--backend codex` sends the selected images to your authenticated service. The calling AI chooses images, arguments and follow-up intervals. It is not a forced one-click summarizer.
 
 ## Install by asking your AI (copy/paste)
 
-아래 프롬프트를 **로컬 도구를 사용할 수 있는 AI**에 붙여넣으세요. 저장소 복제 → 가상환경 → 호스트별 스킬 등록 → 실제 인식 확인 순서로 진행하도록 되어 있습니다.
+Paste the block for your **actual agent host**. Each prompt covers cloning the repository, creating its venv, installing the skill and verifying discovery. These require local tools and persistent storage, not just a model's web chat.
+
+### Codex
 
 ```text
-https://github.com/JangHyuckYun/shorts-scope 를 현재 AI 환경에 설치해줘.
-먼저 그 저장소의 docs/install/README.md와 현재 호스트별 가이드를 읽어줘:
-Codex는 docs/install/codex.md, Claude Code는 docs/install/claude.md,
-OpenClaw는 docs/install/openclaw.md, Grok은 docs/install/grok.md.
-모델 이름이 아니라 실제 실행 호스트를 기준으로 선택해줘.
-영구 보관할 사용자 디렉터리에 git clone하고 기존 파일/변경은 보존해줘.
-저장소 venv와 requirements-compact.txt를 설치하고 FFmpeg/ffprobe를 확인해줘.
-설치 스크립트를 읽고 올바른 호스트/워크스페이스로 dry-run 후 스킬을 등록해줘.
-설치된 실행기 작동과 호스트가 shorts-scope를 실제 인식하는지 각각 확인해줘.
-관련 없는 설정 변경, 기존 스킬 덮어쓰기, 모델/가중치 자동 설치는 하지 마.
-로컬 실행이나 등록 기능이 없으면 설치했다고 하지 말고 필요한 경로를 알려줘.
-끝나면 설치 위치와 내가 이 스킬을 쓰는 예시를 보여줘.
+Install ShortsScope from https://github.com/JangHyuckYun/shorts-scope for this Codex environment. Read docs/install/README.md and docs/install/codex.md from that exact repository first. Clone it into a persistent user-writable directory, preserving any existing checkout or changes. Create its local Python venv and install requirements-compact.txt; check FFmpeg/ffprobe. Review and run scripts/install_skill.py --host codex --dry-run, then install for the current user. Do not change unrelated configuration or install optional models. Verify the installed launcher and that Codex discovers shorts-scope; report its actual path and an invocation example. If this environment has no persistent local execution, explain the specific missing capability rather than claiming installation. No need to ask again for ordinary authorized local setup.
 ```
 
-Host-specific copy/paste prompts: [Codex](docs/install/codex.md) · [Claude Code](docs/install/claude.md) · [OpenClaw](docs/install/openclaw.md) · [Grok / model-vs-host](docs/install/grok.md).
+[Detailed Codex installation guide](docs/install/codex.md).
 
-Grok inside OpenClaw uses the OpenClaw installer. Native registration in ordinary Grok web chat has **not** been verified. The installer tests paths/launcher; the receiving agent must still verify runtime discovery. [Installation details and update behavior](docs/install/README.md).
+### Claude Code
+
+```text
+Install ShortsScope from https://github.com/JangHyuckYun/shorts-scope for this Claude Code environment. Read docs/install/README.md and docs/install/claude.md from that exact repository first. Clone into a persistent user-writable directory without overwriting any existing work. Set up the repository venv with requirements-compact.txt and check FFmpeg/ffprobe. Review scripts/install_skill.py, run --host claude --dry-run, then install for this user. Verify the installed launcher and that Claude Code discovers the shorts-scope skill. Report the actual directory and how to invoke it. Do not modify unrelated settings, install optional models or call paid analysis backends during setup. If local tools/persistent storage are unavailable, explain that limitation instead of reporting success.
+```
+
+[Detailed Claude Code installation guide](docs/install/claude.md).
+
+### Grok
+
+```text
+I want to install ShortsScope from https://github.com/JangHyuckYun/shorts-scope. First identify the host running you, whether it has persistent local shell/filesystem access, and its documented skill registry. Read docs/install/README.md and docs/install/grok.md. If you are inside OpenClaw, follow docs/install/openclaw.md, clone into a persistent directory, set up the venv and verify skill discovery for the actual agent. If another host explicitly supports Agent Skills, use its verified registry and the generic installer dry-run before installation. Do not invent a Grok registration API or ~/.grok/skills directory. If this is ordinary Grok web chat without local execution, state that no local skill has been installed and give the OpenClaw/local-host setup route. Do not request API keys in chat or change unrelated host configuration.
+```
+
+[Detailed Grok installation guide](docs/install/grok.md).
+
+### OpenClaw
+
+```text
+Install ShortsScope from https://github.com/JangHyuckYun/shorts-scope for the active OpenClaw agent. Read docs/install/README.md and docs/install/openclaw.md first. Determine the real agent workspace and execution machine from trusted runtime context, not a guessed default. Clone the repository into a persistent directory available on that machine, preserving existing work, set up its Python venv with requirements-compact.txt, and check FFmpeg/ffprobe. Review scripts/install_skill.py; run --host openclaw --workspace <actual-workspace> --dry-run, then install. Verify the launcher and use the supported skills list/info/check commands for the same agent/Gateway to confirm discovery. Respect any existing installation policy; do not change allowlists or bypass a rejection. Do not invoke a paid model or install optional weights during setup. Report the installed path and a usable invocation, distinguishing file installation from runtime discovery.
+```
+
+[Detailed OpenClaw installation guide](docs/install/openclaw.md).
+
+Grok inside OpenClaw uses the OpenClaw installer. Native registration in ordinary Grok web chat has **not** been verified. The installer checks paths and launcher execution; the receiving host must separately verify skill discovery. [Installation details and updates](docs/install/README.md).
 
 ## Install and extract
 
@@ -73,7 +90,7 @@ python3 -m venv .venv
   --no-endpoint --no-dedup
 ```
 
-The legacy `python skills/watch/scripts/compact.py ...` entry point remains supported. No OpenClaw runtime config or installed skill is changed. The inherited `/watch` implementation is separate; see the [upstream documentation](https://github.com/bradautomates/claude-video#readme) for its URL/caption/Whisper flow. Its plugin installer does not automatically invoke this CLI.
+The legacy `python skills/watch/scripts/compact.py ...` entry point remains supported. No OpenClaw runtime config or installed skill is changed. The upstream `/watch` plugin registration, marketplace manifests, setup hooks and release automation have been removed from this fork. Historical Python utilities remain for source compatibility; use the ShortsScope installer above. [Origin and retained attribution](UPSTREAM.md).
 
 ## Optional frame-by-frame shorts analysis
 
@@ -119,7 +136,7 @@ We reuse upstream keyframe extraction and deduplication. Our adapter adds explic
 
 ## Evidence and limitations
 
-One25.7s prototype test measured input21981→17638 tokens and preprocessing2.45→0.46s. These include changed prompts/resolutions and harness context; they are not claims of general accuracy, portable speed, billing savings or the current configurable CLI's performance. Walking/running classification remains unverified. Small cells lose detail; the model can confuse times, and large sheets may be downscaled. More frames need not improve understanding. Uniform mode currently performs per-timestamp seeks and is intended for focused follow-up, not claimed to be the fastest mode.
+One 25.7s prototype test measured input 21,981→17,638 tokens and preprocessing 2.45→0.46s. These include changed prompts/resolutions and harness context; they are not claims of general accuracy, portable speed, billing savings or the current configurable CLI's performance. Walking/running classification remains unverified. Small cells lose detail; the model can confuse times, and large sheets may be downscaled. More frames need not improve understanding. Uniform mode currently performs per-timestamp seeks and is intended for focused follow-up, not claimed to be the fastest mode.
 
 [Research and improvement directions](docs/RESEARCH.md) · [Development background](docs/OPENCLAW.md) · [License review](docs/LICENSE_REVIEW.md)
 

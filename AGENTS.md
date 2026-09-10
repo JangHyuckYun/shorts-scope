@@ -1,60 +1,34 @@
-# ShortsScope (claude-video fork): composable shorts tools + inherited watch skill
+# ShortsScope repository guide
 
-Agent Skills package that gives an agent a video input. Installable across Claude Code (most common host), Codex, Cursor, GitHub Copilot, and 50+ other [Agent Skills](https://agentskills.io) hosts. Pure-stdlib Python that orchestrates `yt-dlp` + `ffmpeg` and an optional Whisper API.
+ShortsScope is a model-neutral, agent-controlled CLI for inspecting short videos. Public repository: https://github.com/JangHyuckYun/shorts-scope. Preserve the original MIT license and attribution documented in UPSTREAM.md.
 
-## Fork scope
+## Product and boundaries
 
-This community fork adds a **composable CLI for shorts creators** alongside the inherited `/watch` skill. The user's current product direction is agent-controlled primitives, not a forced summarization workflow. Keep `extract` model-free. `analyze` defaults to offline request preparation; optional import validates any provider's raw response, and the explicit Codex backend invokes a separately authenticated external service. The selected brand is ShortsScope and repository is JangHyuckYun/shorts-scope.
+- `extract` prepares local video frames, endpoint and numbered contact sheet. No remote model call.
+- `measure` optionally adds local image-plane motion, OCR/crops/font candidates and pose availability. Missing feet are not a gait classification.
+- `analyze` defaults to offline request preparation; import accepts another AI's raw JSON. `--backend codex` explicitly calls a separately authenticated external service.
+- Keep these independent primitives. Do not force automatic summarization, download, model calls, configuration changes or background jobs.
+- Keep README.md in English and README.ko.md in Korean, with reciprocal language links and separate Codex/Claude Code/Grok/OpenClaw installation prompt blocks.
 
-Optional `measure` produces local image-plane motion, OCR crops and pose-availability evidence. Do not call missing feet a gait classification. `assets/shorts-scope.skill.zip` is the separately exported CLI skill; `scripts/install_skill.py` installs its launcher pointing at the full clone. Do not confuse it with inherited self-contained `/watch`.
+## Layout and distribution
 
-New files: root `cli.py`; `scripts/compact.py` and `scripts/shorts.py` under the self-contained skill directory; `tests/test_compact.py`/`tests/test_shorts.py`; `docs/SHORTS_ANALYSIS.md`; synthetic fixture generator under `examples/`. Pillow is an optional dependency for the compact adapter (`requirements-compact.txt`); inherited upstream scripts remain stdlib-only.
+- `cli.py`: public CLI entry point.
+- `skills/watch/scripts/`: Python implementation. Historical directory name retained for compatibility with existing imports. Some inherited utilities are kept as source, not advertised or registered as a `/watch` skill.
+- `assets/shorts-scope.skill.zip`: exported ShortsScope skill instructions and launcher.
+- `skills/shorts-scope/scripts/run.py`: reviewable launcher source, matching the archive.
+- `scripts/install_skill.py`: copies the exported bundle and points it at the full clone/venv. No network or pip calls; refuses changed existing targets. Keep the checkout available after installation.
+- `docs/install/`: actual host-specific registration guides. Grok model identity alone does not define a registry.
+- `docs/EVIDENCE.md`, `docs/SHORTS_ANALYSIS.md`, `docs/BENCHMARK.md`: behavior, contracts and measured limits.
+- `examples/`: original reproducible fixtures/evaluations; no third-party video required.
 
-Keep third-party media, raw model logs/requests and credentials out of commits. Model schema validation is not factual verification. Do not claim exact font identification, calibrated boxes/tracking or exhaustive video coverage. Record actual model settings and distinguish service failures from successful analysis.
+There are no upstream marketplace manifests, auto-setup hooks or inherited tag-triggered releases in this fork. Do not restore the old `/watch` publication workflow or point install metadata at the upstream project. New release versions must describe ShortsScope, not inherit upstream version claims. Generic plugin/skills CLIs are not the documented installer for this full-checkout adapter.
 
-## Structure
+## Checks
 
-- `skills/watch/SKILL.md` — canonical skill contract the model reads when `/watch` fires. Source of truth for behavior across every host.
-- `skills/watch/scripts/watch.py` — entry point; orchestrates download → frames → transcript.
-- `skills/watch/scripts/{download,frames,transcribe,whisper,setup,config}.py` — yt-dlp wrapper, ffmpeg frame extraction + auto-fps, caption/Whisper transcription, preflight/installer, shared config.
-- `skills/watch/scripts/build-skill.sh` — builds `dist/watch.skill` for claude.ai upload (dev-only).
-- `hooks/` — Claude Code SessionStart setup-status hook (Claude Code only).
-- `.claude-plugin/` — `plugin.json` + `marketplace.json` (Claude Code plugin + local marketplace).
-- `.codex-plugin/plugin.json` — Codex/agents manifest; `"skills": "./skills/"` points the Agent Skills CLI at the self-contained skill folder.
-- `.agents/plugins/marketplace.json` — agents marketplace listing pointing at the repo-root plugin.
-- `CLAUDE.md` → `@AGENTS.md` — generic-agent entry point.
-- `tests/` — pytest suite (ffmpeg-synthesized clips; no network).
+Base: Python3.10+, FFmpeg/ffprobe and requirements-compact.txt. Optional measurements: requirements-evidence.txt, with Tesseract/pose assets separately provided. Run `python -m pytest -q` in a suitable venv; synthetic CV checks require evidence extras. `python examples/evaluate_motion.py` runs known-transform checks. Model tests are offline and never count as model-accuracy evidence.
 
-## Orientation
+Keep tests, docs and the skill ZIP in source archives: they are needed to inspect, install and verify this repository. Do not add export-ignore rules that exclude the required bundle.
 
-- The inherited upstream product is the slash-command-invoked skill (`/watch <url-or-path> [question]`); `scripts/watch.py` is its implementation. The fork CLI is separate and does not automatically modify `/watch` or host runtime configuration. Preserve cross-host behavior of the inherited skill.
-- **The skill is one self-contained folder: `skills/watch/`.** SKILL.md and `scripts/` are siblings inside it. This is what lets `npx skills add` copy a working skill as a unit — do NOT move SKILL.md or `scripts/` back to the repo root, or non-Claude installers will copy SKILL.md without the scripts.
-- **Path resolution is harness-agnostic.** SKILL.md resolves `SKILL_DIR` as the directory of the SKILL.md the model just Read, then runs `${SKILL_DIR}/scripts/...`. Do NOT reintroduce `${CLAUDE_SKILL_DIR}` (Claude-Code-only) — it is unset on Codex/Cursor/agents and breaks every script call there.
-- **No `commands/` wrapper.** `/watch` is derived from SKILL.md frontmatter (`name: watch` + `user-invocable: true`). A separate command file creates a duplicate slash command.
+## Honesty and local data
 
-## Install surfaces
-
-| Surface | Install |
-|---------|---------|
-| Claude Code | `/plugin marketplace add bradautomates/claude-video` then `/plugin install watch@claude-video` |
-| Codex / Cursor / Copilot / +50 | `npx skills add bradautomates/claude-video -g` |
-| claude.ai (web) | upload `dist/watch.skill` (built by `skills/watch/scripts/build-skill.sh`) |
-
-## Commands
-
-```bash
-# Tests (pytest + requirements-compact.txt; ffmpeg required for frame tests; model tests offline)
-.venv/bin/pytest -q                # or: python3 -m pytest -q
-
-# Build the claude.ai upload bundle (archives skills/watch/ as the bundle root)
-bash skills/watch/scripts/build-skill.sh   # → dist/watch.skill
-
-# Dev: mirror the working tree into the installed Claude Code plugin cache
-./dev-sync.sh                       # --dry-run to preview
-```
-
-## Rules
-
-- Keep the version in sync across `skills/watch/SKILL.md` (frontmatter), `.claude-plugin/plugin.json`, and `.codex-plugin/plugin.json` when cutting a release.
-- Releasing: tag `vX.Y.Z` and push the tag; `.github/workflows/release.yml` builds `dist/watch.skill` and attaches it to the GitHub release.
-- Never commit real API keys or `.env` contents; keys live in `~/.config/watch/.env` (mode `0600`) at runtime.
+Never commit credentials, private runtime.json paths, third-party media or raw service logs. Schema validation is not factual verification. Do not claim exact font recovery, calibrated object tracking, exhaustive video coverage or reliable walking/running classification without evidence. Preserve requested/actual settings and distinguish remote timeouts from successful analysis. File installation and launcher smoke tests do not prove host discovery; verify the selected runtime separately.

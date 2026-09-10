@@ -1,6 +1,6 @@
 # Install ShortsScope as an agent skill
 
-This installs the **ShortsScope CLI skill**, not the inherited `/watch` plugin. Keep the cloned repository: the installed launcher delegates to that checkout. No model credentials, background jobs, host configuration changes or automatic paid model calls are part of installation.
+This installs the **ShortsScope CLI skill**, not the upstream `/watch` plugin. Keep the cloned repository: the installed launcher delegates to that checkout. No model credentials, background jobs, host configuration changes or automatic paid model calls are part of installation.
 
 Choose the **host running the agent**, not the model name:
 
@@ -39,4 +39,4 @@ The installed launcher uses its original clone, so do not move/delete that check
 
 ## Bundle provenance
 
-`assets/shorts-scope.skill.zip` is a Skill Workshop-authored export containing exactly `SKILL.md` and `scripts/run.py`; the installer rejects unexpected archive paths. The same launcher source is reviewable at `skills/shorts-scope/scripts/run.py`. Inspect the instruction artifact with `unzip -p assets/shorts-scope.skill.zip SKILL.md` before installation. `skills/shorts-scope/` alone is **not** a standalone `npx skills add` package; the dedicated installer provisions the runtime link. Existing `/watch` plugin packaging is preserved and independent.
+`assets/shorts-scope.skill.zip` is a Skill Workshop-authored export containing exactly `SKILL.md` and `scripts/run.py`; the installer rejects unexpected archive paths. The same launcher source is reviewable at `skills/shorts-scope/scripts/run.py`. Inspect the instruction artifact with `unzip -p assets/shorts-scope.skill.zip SKILL.md` before installation. `skills/shorts-scope/` alone is **not** a standalone `npx skills add` package; the dedicated installer provisions the runtime link. Inherited `/watch` plugin packaging/registration and auto-setup hooks have been removed; only the dedicated ShortsScope installation path is advertised. Reused Python utilities remain as source.
