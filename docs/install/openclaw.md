@@ -5,7 +5,17 @@ Official sources: [Skills](https://docs.openclaw.ai/tools/skills) and [skills CL
 ## Copy/paste into OpenClaw
 
 ```text
-Install ShortsScope from https://github.com/JangHyuckYun/shorts-scope for the active OpenClaw agent. Read docs/install/README.md and docs/install/openclaw.md first. Determine the real agent workspace and execution machine from trusted runtime context, not a guessed default. Clone the repository into a persistent directory available on that machine, preserving existing work, set up its Python venv with requirements-compact.txt, and check FFmpeg/ffprobe. Review scripts/install_skill.py; run --host openclaw --workspace <actual-workspace> --dry-run, then install. Verify the launcher and use the supported skills list/info/check commands for the same agent/Gateway to confirm discovery. Respect any existing installation policy; do not change allowlists or bypass a rejection. Do not invoke a paid model or install optional weights during setup. Report the installed path and a usable invocation, distinguishing file installation from runtime discovery.
+Install ShortsScope from https://github.com/JangHyuckYun/shorts-scope for the active
+OpenClaw agent. Read docs/install/README.md and docs/install/openclaw.md first. Determine
+the real agent workspace and execution machine from trusted runtime context, not a guessed
+default. Clone the repository into a persistent directory available on that machine,
+preserving existing work, set up its Python venv with requirements-compact.txt, and check
+FFmpeg/ffprobe. Review scripts/install_skill.py; run --host openclaw --workspace <actual-
+workspace> --dry-run, then install. Verify the launcher and use the supported skills
+list/info/check commands for the same agent/Gateway to confirm discovery. Respect any
+existing installation policy; do not change allowlists or bypass a rejection. Do not invoke
+a paid model or install optional weights during setup. Report the installed path and a
+usable invocation, distinguishing file installation from runtime discovery.
 ```
 
 ## Commands after common setup

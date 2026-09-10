@@ -1,0 +1,82 @@
+{
+  "tested_commit": "a80702567aa73af8bef42adcf4e95bd6f4f1e4f4",
+  "clone_origin": "https://github.com/JangHyuckYun/shorts-scope.git",
+  "source": "fresh clone from public GitHub, new venv, actual workspace install",
+  "host": {
+    "name": "shorts-scope",
+    "source": "openclaw-workspace",
+    "eligible": true,
+    "modelVisible": true,
+    "userInvocable": true,
+    "disabled": false,
+    "blockedByAllowlist": false,
+    "blockedByAgentFilter": false
+  },
+  "extraction": {
+    "frames": 4,
+    "duration_seconds": 3.0,
+    "labels": [
+      "0.00s",
+      "1.00s",
+      "2.00s",
+      "END"
+    ],
+    "seconds": 0.4141315051820129
+  },
+  "analysis": {
+    "model": "gpt-5.6-luna",
+    "effort": "low",
+    "seconds": 55.81735003693029,
+    "usage": [
+      {
+        "input_tokens": 19011,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 2598,
+        "reasoning_output_tokens": 104
+      }
+    ],
+    "text_exact_matches": 4,
+    "rectangle_bbox_ious": [
+      0.9834,
+      0.9844,
+      0.9844,
+      0.9844
+    ]
+  },
+  "known_model_errors": [
+    "Non-square red rectangle called a square.",
+    "Graphic title classified as subtitle.",
+    "Sparse samples do not establish continuous animation despite suggestive wording."
+  ],
+  "scope": [
+    "OpenClaw inventory and installed launcher verified; not every provider interactive UI.",
+    "Synthetic fixture only; not real-world action accuracy.",
+    "Current host configuration and allowlists unchanged."
+  ],
+  "source_archive": {
+    "tested_commit": "a80702567aa73af8bef42adcf4e95bd6f4f1e4f4",
+    "source": "GitHub-generated tarball",
+    "download_bytes": 88290,
+    "required_files": {
+      "assets/shorts-scope.skill.zip": true,
+      "scripts/install_skill.py": true,
+      "README.md": true,
+      "README.ko.md": true,
+      "docs/install/openclaw.md": true
+    }
+  },
+  "artifacts_sha256": {
+    "analysis.json": "9651eb43e81a08bf428f0daced653d12268f6b3f1b2dcd0af8c29439b9910492",
+    "commands.json": "412900295eb20ce2cd254841a73f1e9d80dc17e4632f63eec9a0e57d9081fe78",
+    "end.jpg": "83abe30931c26714399f4d23f36ae17d1e8e22d5f6aa260119315b99ad53eecb",
+    "expected.json": "c712b2e37b82a41418b3618109baeb8b92c69b8d223d82b48c727c02c4d715e7",
+    "frames/cue_0000.jpg": "dd475dca56d4916fd2e6560d0bf3c9fde9a2d00bf5266ed6a859f4d17afcb389",
+    "frames/cue_0001.jpg": "a53d9f02a591894e9e8b69d01d2ad6849d3273feac41536f4bacc68fc7808c12",
+    "frames/cue_0002.jpg": "8eafad2032740bcbbd89f74095cc0beaf8d31d79836e27fad89e0d35692f19ae",
+    "manifest.json": "b659b3d2393bb9085858d6b6bd291f8d6ef6bd50c3796bc8a719a33f6031dd4e",
+    "prompt.txt": "aa6ef004c8bcd290e521095acd1eead04c68089d92173a17426963ed7c360ff4",
+    "report.md": "216bbfc64702338bfb852946162be6729713d10ac7d2b7222b8329f46a2afa3c",
+    "sheet.png": "099ae7d1e9ea6046d2b156fad208773a92d95883bade4472a25f68971c82a36b"
+  }
+}

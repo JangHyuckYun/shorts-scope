@@ -1,0 +1,47 @@
+{
+  "frames": [
+    {
+      "index": 1,
+      "time_seconds": 0,
+      "rectangle_bbox": [
+        0.08333333333333333,
+        0.3125,
+        0.30833333333333335,
+        0.4703125
+      ],
+      "visible_text": "HELLO SHORTS"
+    },
+    {
+      "index": 2,
+      "time_seconds": 1,
+      "rectangle_bbox": [
+        0.2777777777777778,
+        0.3125,
+        0.5027777777777778,
+        0.4703125
+      ],
+      "visible_text": "HELLO SHORTS"
+    },
+    {
+      "index": 3,
+      "time_seconds": 2,
+      "rectangle_bbox": [
+        0.4722222222222222,
+        0.3125,
+        0.6972222222222222,
+        0.4703125
+      ],
+      "visible_text": "HELLO SHORTS"
+    }
+  ],
+  "motion": "rightward discrete position changes",
+  "text_fill": "white",
+  "foreground_stroke_px": 1,
+  "shadow_offset_px": [
+    3,
+    3
+  ],
+  "shadow_stroke_px": 3,
+  "source_font_filename": "DejaVuSans-Bold.ttf",
+  "note": "Editor/source truth; not fields the VLM is expected to recover exactly."
+}

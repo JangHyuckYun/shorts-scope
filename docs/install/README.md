@@ -31,7 +31,7 @@ Use the host guide below to run `scripts/install_skill.py`. The installer itself
 
 A successful installer reports `launcher_verified: true` only after executing the launcher. It always reports `runtime_discovery_verified: false`: **the receiving host must actually discover the skill**, then the agent should run the installed launcher and demonstrate one small extraction. Use a fresh session if the host caches skill inventory. Never claim a generic directory copy is proof of discovery.
 
-This release tested isolated Codex, Claude Code and OpenClaw destination layouts, launcher execution, idempotent installation and refusal to overwrite changed files. It did **not** run every provider's interactive UI. Host settings, allowlists and remote execution boundaries may affect discovery. In a cloud agent with no persistent filesystem, local installation is not available through a chat prompt alone.
+This release tested isolated Codex, Claude Code and OpenClaw destination layouts, launcher execution, idempotent installation and refusal to overwrite changed files. A subsequent [fresh-clone test](../INSTALL_VERIFICATION.md) verified actual OpenClaw inventory recognition and installed CLI extraction/live analysis. It did **not** run every provider's interactive UI. Host settings, allowlists and remote execution boundaries may affect discovery. In a cloud agent with no persistent filesystem, local installation is not available through a chat prompt alone.
 
 ## Updating / removal
 

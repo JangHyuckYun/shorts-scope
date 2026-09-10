@@ -1,0 +1,54 @@
+{
+  "duration_seconds": 3.0,
+  "frames": [
+    {
+      "index": 1,
+      "time_seconds": 0.0,
+      "label": "0.00s",
+      "file": "frames/cue_0000.jpg"
+    },
+    {
+      "index": 2,
+      "time_seconds": 1.0,
+      "label": "1.00s",
+      "file": "frames/cue_0001.jpg"
+    },
+    {
+      "index": 3,
+      "time_seconds": 2.0,
+      "label": "2.00s",
+      "file": "frames/cue_0002.jpg"
+    },
+    {
+      "index": 4,
+      "time_seconds": null,
+      "label": "END",
+      "file": "end.jpg"
+    }
+  ],
+  "extractor": {
+    "engine": "timestamps",
+    "candidate_count": 3,
+    "selected_count": 3,
+    "dropped_out_of_window": 0,
+    "fallback": false
+  },
+  "sheet": "sheet.png",
+  "options": {
+    "sampler": "uniform",
+    "max_frames": 4,
+    "width": 360,
+    "max_height": 720,
+    "columns": 4,
+    "padding": 12,
+    "quality": null,
+    "format": "png",
+    "endpoint": true,
+    "dedup": false,
+    "start": 0,
+    "end": 3.0
+  },
+  "seconds": 0.4141315051820129,
+  "audio_included": false,
+  "model_called": false
+}

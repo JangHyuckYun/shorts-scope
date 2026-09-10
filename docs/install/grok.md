@@ -10,7 +10,16 @@
 ## Copy/paste into your Grok-powered agent
 
 ```text
-I want to install ShortsScope from https://github.com/JangHyuckYun/shorts-scope. First identify the host running you, whether it has persistent local shell/filesystem access, and its documented skill registry. Read docs/install/README.md and docs/install/grok.md. If you are inside OpenClaw, follow docs/install/openclaw.md, clone into a persistent directory, set up the venv and verify skill discovery for the actual agent. If another host explicitly supports Agent Skills, use its verified registry and the generic installer dry-run before installation. Do not invent a Grok registration API or ~/.grok/skills directory. If this is ordinary Grok web chat without local execution, state that no local skill has been installed and give the OpenClaw/local-host setup route. Do not request API keys in chat or change unrelated host configuration.
+I want to install ShortsScope from https://github.com/JangHyuckYun/shorts-scope. First
+identify the host running you, whether it has persistent local shell/filesystem access, and
+its documented skill registry. Read docs/install/README.md and docs/install/grok.md. If you
+are inside OpenClaw, follow docs/install/openclaw.md, clone into a persistent directory, set
+up the venv and verify skill discovery for the actual agent. If another host explicitly
+supports Agent Skills, use its verified registry and the generic installer dry-run before
+installation. Do not invent a Grok registration API or ~/.grok/skills directory. If this is
+ordinary Grok web chat without local execution, state that no local skill has been installed
+and give the OpenClaw/local-host setup route. Do not request API keys in chat or change
+unrelated host configuration.
 ```
 
 ## Verified generic registry only

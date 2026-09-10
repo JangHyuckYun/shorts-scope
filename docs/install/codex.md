@@ -5,7 +5,16 @@ For a local filesystem-enabled Codex host. Official discovery documentation: [Co
 ## Copy/paste into Codex
 
 ```text
-Install ShortsScope from https://github.com/JangHyuckYun/shorts-scope for this Codex environment. Read docs/install/README.md and docs/install/codex.md from that exact repository first. Clone it into a persistent user-writable directory, preserving any existing checkout or changes. Create its local Python venv and install requirements-compact.txt; check FFmpeg/ffprobe. Review and run scripts/install_skill.py --host codex --dry-run, then install for the current user. Do not change unrelated configuration or install optional models. Verify the installed launcher and that Codex discovers shorts-scope; report its actual path and an invocation example. If this environment has no persistent local execution, explain the specific missing capability rather than claiming installation. No need to ask again for ordinary authorized local setup.
+Install ShortsScope from https://github.com/JangHyuckYun/shorts-scope for this Codex
+environment. Read docs/install/README.md and docs/install/codex.md from that exact
+repository first. Clone it into a persistent user-writable directory, preserving any
+existing checkout or changes. Create its local Python venv and install requirements-
+compact.txt; check FFmpeg/ffprobe. Review and run scripts/install_skill.py --host codex
+--dry-run, then install for the current user. Do not change unrelated configuration or
+install optional models. Verify the installed launcher and that Codex discovers shorts-
+scope; report its actual path and an invocation example. If this environment has no
+persistent local execution, explain the specific missing capability rather than claiming
+installation. No need to ask again for ordinary authorized local setup.
 ```
 
 ## Commands after common setup

@@ -1,0 +1,181 @@
+{
+  "note": "Actual subprocess output. Local directory prefixes replaced with placeholders; command names/arguments, return codes, times and result content retained.",
+  "steps": [
+    {
+      "argv": [
+        "git",
+        "remote",
+        "get-url",
+        "origin"
+      ],
+      "exit_code": 0,
+      "seconds": 0.002,
+      "stdout": "https://github.com/JangHyuckYun/shorts-scope.git\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "seconds": 0.002,
+      "stdout": "a80702567aa73af8bef42adcf4e95bd6f4f1e4f4\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "venv",
+        ".venv"
+      ],
+      "exit_code": 0,
+      "seconds": 2.37,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "<REPO>/.venv/bin/python",
+        "-m",
+        "pip",
+        "install",
+        "-r",
+        "requirements-compact.txt"
+      ],
+      "exit_code": 0,
+      "seconds": 1.25,
+      "stdout": "Collecting Pillow<13,>=10.4 (from -r requirements-compact.txt (line 2))\n  Using cached pillow-12.3.0-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (9.1 kB)\nUsing cached pillow-12.3.0-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (6.9 MB)\nInstalling collected packages: Pillow\nSuccessfully installed Pillow-12.3.0\n",
+      "stderr": "\n[notice] A new release of pip is available: 25.3 -> 26.2.1\n[notice] To update, run: <REPO>/.venv/bin/python -m pip install --upgrade pip\n"
+    },
+    {
+      "argv": [
+        "<REPO>/.venv/bin/python",
+        "scripts/install_skill.py",
+        "--host",
+        "openclaw",
+        "--workspace",
+        "<WORKSPACE>",
+        "--dry-run"
+      ],
+      "exit_code": 0,
+      "seconds": 0.051,
+      "stdout": "{\"host\": \"openclaw\", \"target\": \"<SKILL>\", \"repo\": \"<REPO>\", \"runtime_discovery_verified\": false, \"dry_run\": true, \"status\": \"planned\"}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "<REPO>/.venv/bin/python",
+        "scripts/install_skill.py",
+        "--host",
+        "openclaw",
+        "--workspace",
+        "<WORKSPACE>"
+      ],
+      "exit_code": 0,
+      "seconds": 0.119,
+      "stdout": "{\"host\": \"openclaw\", \"target\": \"<SKILL>\", \"repo\": \"<REPO>\", \"runtime_discovery_verified\": false, \"dry_run\": false, \"status\": \"installed\", \"launcher_verified\": true}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "openclaw",
+        "skills",
+        "info",
+        "shorts-scope",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 2.632,
+      "stdout": "{\n  \"name\": \"shorts-scope\",\n  \"description\": \"Inspect short videos: frames, motion, OCR/text styles and evidence-grounded creator notes using ShortsScope CLI.\",\n  \"source\": \"openclaw-workspace\",\n  \"bundled\": false,\n  \"filePath\": \"<SKILL>/SKILL.md\",\n  \"baseDir\": \"<SKILL>\",\n  \"skillKey\": \"shorts-scope\",\n  \"always\": false,\n  \"disabled\": false,\n  \"blockedByAllowlist\": false,\n  \"blockedByAgentFilter\": false,\n  \"eligible\": true,\n  \"platformIncompatible\": false,\n  \"modelVisible\": true,\n  \"userInvocable\": true,\n  \"commandVisible\": true,\n  \"requirements\": {\n    \"bins\": [],\n    \"anyBins\": [],\n    \"env\": [],\n    \"config\": [],\n    \"os\": []\n  },\n  \"missing\": {\n    \"bins\": [],\n    \"anyBins\": [],\n    \"env\": [],\n    \"config\": [],\n    \"os\": []\n  },\n  \"configChecks\": [],\n  \"install\": []\n}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "<REPO>/.venv/bin/python",
+        "<SKILL>/scripts/run.py",
+        "--help"
+      ],
+      "exit_code": 0,
+      "seconds": 0.05,
+      "stdout": "Usage: python cli.py extract SOURCE --out DIR [options]\n\nextract: keyframes/uniform sampling + optional endpoint + numbered contact sheet.\nRun python cli.py extract --help for all arguments. extract never calls a model.\nanalyze MANIFEST --out DIR [--backend prepare|codex|import] prepares or runs structured shorts analysis.\nmeasure MANIFEST --out DIR [--ocr] creates local motion/OCR/pose evidence.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "<REPO>/.venv/bin/python",
+        "examples/make_style_fixture.py",
+        "--font",
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+        "--out",
+        "<ARTIFACTS>/fixture"
+      ],
+      "exit_code": 0,
+      "seconds": 0.245,
+      "stdout": "{\"video\": \"<ARTIFACTS>/fixture/video.mp4\", \"expected\": \"<ARTIFACTS>/fixture/expected.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "<REPO>/.venv/bin/python",
+        "<SKILL>/scripts/run.py",
+        "extract",
+        "<ARTIFACTS>/fixture/video.mp4",
+        "--out",
+        "<ARTIFACTS>/frames",
+        "--sampler",
+        "uniform",
+        "--max-frames",
+        "4",
+        "--columns",
+        "4",
+        "--width",
+        "360",
+        "--format",
+        "png"
+      ],
+      "exit_code": 0,
+      "seconds": 0.6,
+      "stdout": "{\n  \"duration_seconds\": 3.0,\n  \"frames\": [\n    {\n      \"index\": 1,\n      \"time_seconds\": 0.0,\n      \"label\": \"0.00s\",\n      \"file\": \"frames/cue_0000.jpg\"\n    },\n    {\n      \"index\": 2,\n      \"time_seconds\": 1.0,\n      \"label\": \"1.00s\",\n      \"file\": \"frames/cue_0001.jpg\"\n    },\n    {\n      \"index\": 3,\n      \"time_seconds\": 2.0,\n      \"label\": \"2.00s\",\n      \"file\": \"frames/cue_0002.jpg\"\n    },\n    {\n      \"index\": 4,\n      \"time_seconds\": null,\n      \"label\": \"END\",\n      \"file\": \"end.jpg\"\n    }\n  ],\n  \"extractor\": {\n    \"engine\": \"timestamps\",\n    \"candidate_count\": 3,\n    \"selected_count\": 3,\n    \"dropped_out_of_window\": 0,\n    \"fallback\": false\n  },\n  \"sheet\": \"sheet.png\",\n  \"options\": {\n    \"sampler\": \"uniform\",\n    \"max_frames\": 4,\n    \"width\": 360,\n    \"max_height\": 720,\n    \"columns\": 4,\n    \"padding\": 12,\n    \"quality\": null,\n    \"format\": \"png\",\n    \"endpoint\": true,\n    \"dedup\": false,\n    \"start\": 0,\n    \"end\": 3.0\n  },\n  \"seconds\": 0.4141315051820129,\n  \"audio_included\": false,\n  \"model_called\": false\n}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "<REPO>/.venv/bin/python",
+        "<SKILL>/scripts/run.py",
+        "analyze",
+        "<ARTIFACTS>/frames/manifest.json",
+        "--out",
+        "<ARTIFACTS>/prepared"
+      ],
+      "exit_code": 0,
+      "seconds": 0.073,
+      "stdout": "{\"status\": \"prepared\", \"request\": \"<ARTIFACTS>/prepared/request.json\", \"model_called\": false}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "<REPO>/.venv/bin/python",
+        "<SKILL>/scripts/run.py",
+        "analyze",
+        "<ARTIFACTS>/frames/manifest.json",
+        "--out",
+        "<ARTIFACTS>/analysis",
+        "--backend",
+        "codex",
+        "--model",
+        "gpt-5.6-luna",
+        "--effort",
+        "low",
+        "--timeout",
+        "150"
+      ],
+      "exit_code": 0,
+      "seconds": 55.89,
+      "stdout": "{\"status\": \"analyzed\", \"result\": \"<ARTIFACTS>/analysis/analysis.json\", \"report\": \"<ARTIFACTS>/analysis/report.md\", \"model_called\": true}\n",
+      "stderr": ""
+    }
+  ]
+}

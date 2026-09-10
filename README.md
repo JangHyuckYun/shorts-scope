@@ -15,7 +15,16 @@ Paste the block for your **actual agent host**. Each prompt covers cloning the r
 ### Codex
 
 ```text
-Install ShortsScope from https://github.com/JangHyuckYun/shorts-scope for this Codex environment. Read docs/install/README.md and docs/install/codex.md from that exact repository first. Clone it into a persistent user-writable directory, preserving any existing checkout or changes. Create its local Python venv and install requirements-compact.txt; check FFmpeg/ffprobe. Review and run scripts/install_skill.py --host codex --dry-run, then install for the current user. Do not change unrelated configuration or install optional models. Verify the installed launcher and that Codex discovers shorts-scope; report its actual path and an invocation example. If this environment has no persistent local execution, explain the specific missing capability rather than claiming installation. No need to ask again for ordinary authorized local setup.
+Install ShortsScope from https://github.com/JangHyuckYun/shorts-scope for this Codex
+environment. Read docs/install/README.md and docs/install/codex.md from that exact
+repository first. Clone it into a persistent user-writable directory, preserving any
+existing checkout or changes. Create its local Python venv and install requirements-
+compact.txt; check FFmpeg/ffprobe. Review and run scripts/install_skill.py --host codex
+--dry-run, then install for the current user. Do not change unrelated configuration or
+install optional models. Verify the installed launcher and that Codex discovers shorts-
+scope; report its actual path and an invocation example. If this environment has no
+persistent local execution, explain the specific missing capability rather than claiming
+installation. No need to ask again for ordinary authorized local setup.
 ```
 
 [Detailed Codex installation guide](docs/install/codex.md).
@@ -23,7 +32,16 @@ Install ShortsScope from https://github.com/JangHyuckYun/shorts-scope for this C
 ### Claude Code
 
 ```text
-Install ShortsScope from https://github.com/JangHyuckYun/shorts-scope for this Claude Code environment. Read docs/install/README.md and docs/install/claude.md from that exact repository first. Clone into a persistent user-writable directory without overwriting any existing work. Set up the repository venv with requirements-compact.txt and check FFmpeg/ffprobe. Review scripts/install_skill.py, run --host claude --dry-run, then install for this user. Verify the installed launcher and that Claude Code discovers the shorts-scope skill. Report the actual directory and how to invoke it. Do not modify unrelated settings, install optional models or call paid analysis backends during setup. If local tools/persistent storage are unavailable, explain that limitation instead of reporting success.
+Install ShortsScope from https://github.com/JangHyuckYun/shorts-scope for this Claude Code
+environment. Read docs/install/README.md and docs/install/claude.md from that exact
+repository first. Clone into a persistent user-writable directory without overwriting any
+existing work. Set up the repository venv with requirements-compact.txt and check
+FFmpeg/ffprobe. Review scripts/install_skill.py, run --host claude --dry-run, then install
+for this user. Verify the installed launcher and that Claude Code discovers the shorts-scope
+skill. Report the actual directory and how to invoke it. Do not modify unrelated settings,
+install optional models or call paid analysis backends during setup. If local
+tools/persistent storage are unavailable, explain that limitation instead of reporting
+success.
 ```
 
 [Detailed Claude Code installation guide](docs/install/claude.md).
@@ -31,7 +49,16 @@ Install ShortsScope from https://github.com/JangHyuckYun/shorts-scope for this C
 ### Grok
 
 ```text
-I want to install ShortsScope from https://github.com/JangHyuckYun/shorts-scope. First identify the host running you, whether it has persistent local shell/filesystem access, and its documented skill registry. Read docs/install/README.md and docs/install/grok.md. If you are inside OpenClaw, follow docs/install/openclaw.md, clone into a persistent directory, set up the venv and verify skill discovery for the actual agent. If another host explicitly supports Agent Skills, use its verified registry and the generic installer dry-run before installation. Do not invent a Grok registration API or ~/.grok/skills directory. If this is ordinary Grok web chat without local execution, state that no local skill has been installed and give the OpenClaw/local-host setup route. Do not request API keys in chat or change unrelated host configuration.
+I want to install ShortsScope from https://github.com/JangHyuckYun/shorts-scope. First
+identify the host running you, whether it has persistent local shell/filesystem access, and
+its documented skill registry. Read docs/install/README.md and docs/install/grok.md. If you
+are inside OpenClaw, follow docs/install/openclaw.md, clone into a persistent directory, set
+up the venv and verify skill discovery for the actual agent. If another host explicitly
+supports Agent Skills, use its verified registry and the generic installer dry-run before
+installation. Do not invent a Grok registration API or ~/.grok/skills directory. If this is
+ordinary Grok web chat without local execution, state that no local skill has been installed
+and give the OpenClaw/local-host setup route. Do not request API keys in chat or change
+unrelated host configuration.
 ```
 
 [Detailed Grok installation guide](docs/install/grok.md).
@@ -39,12 +66,26 @@ I want to install ShortsScope from https://github.com/JangHyuckYun/shorts-scope.
 ### OpenClaw
 
 ```text
-Install ShortsScope from https://github.com/JangHyuckYun/shorts-scope for the active OpenClaw agent. Read docs/install/README.md and docs/install/openclaw.md first. Determine the real agent workspace and execution machine from trusted runtime context, not a guessed default. Clone the repository into a persistent directory available on that machine, preserving existing work, set up its Python venv with requirements-compact.txt, and check FFmpeg/ffprobe. Review scripts/install_skill.py; run --host openclaw --workspace <actual-workspace> --dry-run, then install. Verify the launcher and use the supported skills list/info/check commands for the same agent/Gateway to confirm discovery. Respect any existing installation policy; do not change allowlists or bypass a rejection. Do not invoke a paid model or install optional weights during setup. Report the installed path and a usable invocation, distinguishing file installation from runtime discovery.
+Install ShortsScope from https://github.com/JangHyuckYun/shorts-scope for the active
+OpenClaw agent. Read docs/install/README.md and docs/install/openclaw.md first. Determine
+the real agent workspace and execution machine from trusted runtime context, not a guessed
+default. Clone the repository into a persistent directory available on that machine,
+preserving existing work, set up its Python venv with requirements-compact.txt, and check
+FFmpeg/ffprobe. Review scripts/install_skill.py; run --host openclaw --workspace <actual-
+workspace> --dry-run, then install. Verify the launcher and use the supported skills
+list/info/check commands for the same agent/Gateway to confirm discovery. Respect any
+existing installation policy; do not change allowlists or bypass a rejection. Do not invoke
+a paid model or install optional weights during setup. Report the installed path and a
+usable invocation, distinguishing file installation from runtime discovery.
 ```
 
 [Detailed OpenClaw installation guide](docs/install/openclaw.md).
 
 Grok inside OpenClaw uses the OpenClaw installer. Native registration in ordinary Grok web chat has **not** been verified. The installer checks paths and launcher execution; the receiving host must separately verify skill discovery. [Installation details and updates](docs/install/README.md).
+
+## Verified public-repository install
+
+A fresh GitHub clone was installed into the active OpenClaw workspace, discovered by OpenClaw, and used through its installed launcher for extraction and live analysis. [Commands, generated images, raw results and known errors](docs/INSTALL_VERIFICATION.md).
 
 ## Install and extract
 

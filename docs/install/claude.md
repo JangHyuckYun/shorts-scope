@@ -5,7 +5,16 @@ For **Claude Code with local tools**, not a promise about the Claude web chat. O
 ## Copy/paste into Claude Code
 
 ```text
-Install ShortsScope from https://github.com/JangHyuckYun/shorts-scope for this Claude Code environment. Read docs/install/README.md and docs/install/claude.md from that exact repository first. Clone into a persistent user-writable directory without overwriting any existing work. Set up the repository venv with requirements-compact.txt and check FFmpeg/ffprobe. Review scripts/install_skill.py, run --host claude --dry-run, then install for this user. Verify the installed launcher and that Claude Code discovers the shorts-scope skill. Report the actual directory and how to invoke it. Do not modify unrelated settings, install optional models or call paid analysis backends during setup. If local tools/persistent storage are unavailable, explain that limitation instead of reporting success.
+Install ShortsScope from https://github.com/JangHyuckYun/shorts-scope for this Claude Code
+environment. Read docs/install/README.md and docs/install/claude.md from that exact
+repository first. Clone into a persistent user-writable directory without overwriting any
+existing work. Set up the repository venv with requirements-compact.txt and check
+FFmpeg/ffprobe. Review scripts/install_skill.py, run --host claude --dry-run, then install
+for this user. Verify the installed launcher and that Claude Code discovers the shorts-scope
+skill. Report the actual directory and how to invoke it. Do not modify unrelated settings,
+install optional models or call paid analysis backends during setup. If local
+tools/persistent storage are unavailable, explain that limitation instead of reporting
+success.
 ```
 
 ## Commands after common setup

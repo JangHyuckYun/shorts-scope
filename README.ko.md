@@ -82,6 +82,10 @@ scripts/install_skill.py를 읽고 --host openclaw --workspace <실제 워크스
 
 Grok을 OpenClaw에서 사용한다면 OpenClaw 방식으로 설치합니다. 일반 Grok 웹의 로컬 스킬 등록은 확인되지 않았습니다. 설치기는 경로와 실행기를 검사하지만 **호스트가 스킬을 실제로 인식하는지는 별도 확인**해야 합니다. [공통 설치·업데이트 안내](docs/install/README.md)
 
+## 공개 저장소로 실제 설치·사용 검증
+
+공개 GitHub를 새로 clone해 실제 OpenClaw 워크스페이스에 설치했고, 스킬 인식과 설치된 실행기를 통한 추출·실제 모델 분석을 확인했습니다. [실행 기록·생성 이미지·원본 결과·남은 오류](docs/INSTALL_VERIFICATION.md)에서 증거를 볼 수 있습니다.
+
 ## 직접 설치하고 프레임 추출하기
 
 Python 3.10 이상과 PATH에 등록된 FFmpeg/ffprobe가 필요합니다. Pillow는 이 추출 기능의 필수 의존성입니다. 아래 명령은 Linux/macOS 또는 Windows의 WSL 환경 기준입니다.
