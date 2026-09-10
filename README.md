@@ -1,8 +1,10 @@
-# Composable video frame extraction
+# Composable shorts analysis tools
 
 A model-agnostic CLI for agents: **fast frame extraction → optional final frame → numbered, timestamped contact sheet**. Developed for use inside OpenClaw, but not dependent on it. This community fork extends [claude-video](https://github.com/bradautomates/claude-video); original MIT copyright and license are retained. A new project name has not yet been selected.
 
-This tool prepares visual inputs. **It does not call an AI model, summarize, upload media, or infer why a video is popular.** An agent chooses the arguments, reads the resulting images, and decides whether to inspect a smaller interval.
+Two independent operations: **`extract`** prepares images locally; **`analyze`** prepares a structured visual-analysis request, imports any model's response, or explicitly runs an optional Codex backend. Designed to help a creator study short-video composition, actions and text styling. Neither operation automatically downloads references or makes a video.
+
+`extract` never calls a model or uploads media. `analyze` defaults to offline preparation too; only `--backend codex` sends the selected images to your authenticated service. The calling AI chooses images, arguments and follow-up intervals. It is not a forced one-click summarizer.
 
 ## Install and extract
 
@@ -50,9 +52,32 @@ python3 -m venv .venv
 
 The legacy `python skills/watch/scripts/compact.py ...` entry point remains supported. No OpenClaw runtime config or installed skill is changed. The inherited `/watch` implementation is separate; see the [upstream documentation](https://github.com/bradautomates/claude-video#readme) for its URL/caption/Whisper flow. Its plugin installer does not automatically invoke this CLI.
 
+## Optional frame-by-frame shorts analysis
+
+Analysis reads **selected individual frames**, avoiding montage-coordinate ambiguity and preserving more detail than small grid cells. It records objects/estimated boxes/poses, visible text and styling, temporal comparisons, editing observations and evidence-linked creation suggestions.
+
+```sh
+# No model call: schema + prompt + image list for any image-capable AI
+.venv/bin/python cli.py analyze output/overview/manifest.json --out output/request
+
+# Import that AI's raw JSON response; validate and produce JSON + readable report
+.venv/bin/python cli.py analyze output/overview/manifest.json --out output/analysis \
+  --backend import --response response.json
+
+# Or explicitly run the optional authenticated Codex backend (POSIX)
+.venv/bin/python cli.py analyze output/overview/manifest.json --out output/codex-analysis \
+  --backend codex --model gpt-5.6-luna --effort low --timeout 180
+```
+
+The Codex adapter requires a separately installed/authenticated CLI supporting `--image`, `--output-schema`, `--json`, `--ignore-user-config` and `--ephemeral`. Select an image-capable model available to your account. OpenClaw and Codex are **not** required for prepare/import.
+
+`analysis.json` and `report.md` distinguish visible evidence from creative proposals. Font appearance, weight, stroke and shadow are **visual estimates**, not recovered editor settings; `exact_font_name` is always null. This is **sampled-frame analysis, not exhaustive analysis of every video frame**, verified tracking, audio analysis or guaranteed OCR. Follow-up suggestions are data, never automatically executed.
+
+[Detailed usage, output fields and verification](docs/SHORTS_ANALYSIS.md)
+
 ## What differs from upstream?
 
-We reuse upstream keyframe extraction and deduplication. Our adapter adds explicit endpoint preservation, a bounded numbered contact sheet, agent-controlled layout/range/encoding, and machine-readable output. It is not a new vision model or a new image-grid research method.
+We reuse upstream keyframe extraction and deduplication. Our adapter adds explicit endpoint preservation, a bounded numbered contact sheet, agent-controlled layout/range/encoding, and machine-readable output. The separate analysis adapter adds a provider-neutral response contract, geometry/reference validation and reports. It is not a new vision model or a new image-grid research method.
 
 ## Evidence and limitations
 

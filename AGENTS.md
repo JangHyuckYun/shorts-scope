@@ -1,6 +1,14 @@
-# claude-video / watch skill
+# claude-video fork: composable shorts tools + inherited watch skill
 
 Agent Skills package that gives an agent a video input. Installable across Claude Code (most common host), Codex, Cursor, GitHub Copilot, and 50+ other [Agent Skills](https://agentskills.io) hosts. Pure-stdlib Python that orchestrates `yt-dlp` + `ffmpeg` and an optional Whisper API.
+
+## Fork scope
+
+This community fork adds a **composable CLI for shorts creators** alongside the inherited `/watch` skill. The user's current product direction is agent-controlled primitives, not a forced summarization workflow. Keep `extract` model-free. `analyze` defaults to offline request preparation; optional import validates any provider's raw response, and the explicit Codex backend invokes a separately authenticated external service. Do not rename the repository without a selected name.
+
+New files: root `cli.py`; `scripts/compact.py` and `scripts/shorts.py` under the self-contained skill directory; `tests/test_compact.py`/`tests/test_shorts.py`; `docs/SHORTS_ANALYSIS.md`; synthetic fixture generator under `examples/`. Pillow is an optional dependency for the compact adapter (`requirements-compact.txt`); inherited upstream scripts remain stdlib-only.
+
+Keep third-party media, raw model logs/requests and credentials out of commits. Model schema validation is not factual verification. Do not claim exact font identification, calibrated boxes/tracking or exhaustive video coverage. Record actual model settings and distinguish service failures from successful analysis.
 
 ## Structure
 
@@ -17,7 +25,7 @@ Agent Skills package that gives an agent a video input. Installable across Claud
 
 ## Orientation
 
-- The product is the slash-command-invoked skill (`/watch <url-or-path> [question]`), not a CLI. `scripts/watch.py` is implementation. Features must work across every harness the skill installs into, not just Claude Code.
+- The inherited upstream product is the slash-command-invoked skill (`/watch <url-or-path> [question]`); `scripts/watch.py` is its implementation. The fork CLI is separate and does not automatically modify `/watch` or host runtime configuration. Preserve cross-host behavior of the inherited skill.
 - **The skill is one self-contained folder: `skills/watch/`.** SKILL.md and `scripts/` are siblings inside it. This is what lets `npx skills add` copy a working skill as a unit — do NOT move SKILL.md or `scripts/` back to the repo root, or non-Claude installers will copy SKILL.md without the scripts.
 - **Path resolution is harness-agnostic.** SKILL.md resolves `SKILL_DIR` as the directory of the SKILL.md the model just Read, then runs `${SKILL_DIR}/scripts/...`. Do NOT reintroduce `${CLAUDE_SKILL_DIR}` (Claude-Code-only) — it is unset on Codex/Cursor/agents and breaks every script call there.
 - **No `commands/` wrapper.** `/watch` is derived from SKILL.md frontmatter (`name: watch` + `user-invocable: true`). A separate command file creates a duplicate slash command.
@@ -33,7 +41,7 @@ Agent Skills package that gives an agent a video input. Installable across Claud
 ## Commands
 
 ```bash
-# Tests (stdlib + pytest; ffmpeg required for frame tests)
+# Tests (pytest + requirements-compact.txt; ffmpeg required for frame tests; model tests offline)
 .venv/bin/pytest -q                # or: python3 -m pytest -q
 
 # Build the claude.ai upload bundle (archives skills/watch/ as the bundle root)

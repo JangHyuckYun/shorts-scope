@@ -10,3 +10,7 @@ Scope: code actually reused or required by this fork, not a blanket legal cleara
 - TransNetV2, Qwen3-VL, VideoLLaMA3, Decord and claude-real-video: discussed as candidates but no code/weights copied into this fork; their licenses are not cleared for future integration by this review.
 
 No incompatibility identified for publishing this MIT fork with an optional Pillow dependency and external FFmpeg. This is a repository-level license review, not a warranty of third-party authorship, patent rights or compliance for every commercial deployment. MIT provides no warranty. Video/music copyright, personal-data processing, site terms and model-provider terms remain separate. Brand mentions describe compatibility and do not imply endorsement.
+
+## Shorts-analysis extension
+
+The analysis adapter, JSON schema, tests and synthetic-fixture generator are additions under this repository's MIT license. They do not copy paper implementations or bundle model weights. The optional Codex command is an external, separately installed/authenticated program; its service/account terms and any analysis charges remain separate from the fork's code license. No Codex binaries, credentials, font files or third-party reference media are included. The fixture generator takes a user's local font path; users retain responsibility for that font's applicable terms when distributing generated assets or bundling a font.
