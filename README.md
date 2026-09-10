@@ -1,3 +1,11 @@
+# OpenClaw-oriented compact video fork
+
+Community fork of [bradautomates/claude-video](https://github.com/bradautomates/claude-video), created for video-analysis inputs inside OpenClaw. Adds an optional low-token keyframe/contact-sheet adapter; not a new model.
+
+**Start here:** [OpenClaw usage and limitations](docs/OPENCLAW.md) · [License and commercial-use review](docs/LICENSE_REVIEW.md). Original `/watch` behavior and installation instructions below are retained upstream documentation; the compact adapter is invoked separately.
+
+---
+
 # /watch
 
 **Give Claude the ability to watch any video.**

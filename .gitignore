@@ -14,3 +14,12 @@ htmlcov/
 
 # local Claude Code settings
 .claude/settings.local.json
+
+# Private local media and generated output
+/output/
+.env
+.env.*
+*.mp4
+*.mov
+*.webm
+TASK_STATE.md
